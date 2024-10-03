@@ -14,7 +14,7 @@ export default function Home() {
           <Search />
         </div>
         <div className="grid grid-cols-layout-container gap-6 h-full">
-          <div className="grid grid-rows-layout gap-6">
+          <div className="flex flex-col gap-6">
             <WeatherLocation />
             <TodayForecast />
             <AirConditions />
