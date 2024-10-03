@@ -1,7 +1,6 @@
 import { NextUIProvider } from "@nextui-org/react";
 import "./globals.css";
 import ShareState from "@/components/shared/context/share-state";
-import SideBar from "@/components/layout/sidebar";
 
 export const metadata = {
   title: "WeatherWise",
@@ -14,8 +13,7 @@ export default function RootLayout({ children }) {
       <body>
         <NextUIProvider className="default relative">
           <ShareState>
-            <main className="bg-primary grid grid-cols-layout min-h-screen p-6 gap-6">
-              <SideBar />
+            <main className="bg-primary h-auto min-h-screen">
               {children}
             </main>
           </ShareState>

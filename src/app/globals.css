@@ -11,5 +11,10 @@ body {
   scroll-behavior: smooth;
 }
 .box-container{
-    @apply bg-secondary rounded-xl;
+    @apply bg-secondary rounded-xl p-6;
+}
+
+input{
+    outline: transparent;
+    @apply outline-transparent;
 }

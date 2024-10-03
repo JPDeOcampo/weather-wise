@@ -56,15 +56,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primaryBlue: "#071521",
-        secondaryBlue: "#5c7d99",
-      },
       gridTemplateColumns: {
-        'layout': '80px minmax(65%, 100px) minmax(20%, 1fr)',
+        'layout': '80px 1fr',
+        'layout-container': '60% 1fr',
       },
       gridTemplateRows: {
-        'layout': '50px 260px 180px 1fr',
+        'layout': '260px 180px 1fr',
       }
     },
   },

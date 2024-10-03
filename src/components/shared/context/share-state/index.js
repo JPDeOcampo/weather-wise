@@ -1,38 +1,40 @@
 "use client"
 import { createContext, useMemo, useState, useEffect } from 'react';
 import { fetchWeather } from '@/services/api/cityService';
+import { sampleWeatherCity } from '../../constant/weatherCity';
 export const ShareContext = createContext();
 const ShareState = ({ children }) => {
-  const [weather, setWeather] = useState({});
+  const [weatherCity, setWeatherCity] = useState(sampleWeatherCity);
   const [location, setLocation] = useState(false);
   const [city, setCity] = useState('manila');
+  console.log(weatherCity)
+  // useEffect(() => {
+  //   async function getWeather() {
+  //     try {
+  //       const data = await fetchWeather(city);
+  //       setWeatherCity(data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     }
+  //   }
 
-  useEffect(() => {
-    async function getWeather() {
-      try {
-        const data = await fetchWeather(city);
-        setWeather(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    }
+  //   getWeather();
+  // }, [city]); 
 
-    getWeather();
-  }, [city]); 
-
-console.log(weather)
-  const contextValue = useMemo(()=> ({
+  const contextValue = useMemo(() => ({
     location,
     setLocation,
-    weather
-  }),[
+    weatherCity,
+    setCity
+  }), [
     location,
     setLocation,
-    weather,
+    weatherCity,
+    setCity,
   ])
   return (
     <ShareContext.Provider value={contextValue}>
-        {children}
+      {children}
     </ShareContext.Provider>
   )
 }

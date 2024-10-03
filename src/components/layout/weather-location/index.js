@@ -2,12 +2,13 @@
 import { useContext } from "react";
 import { ShareContext } from "@/components/shared/context/share-state";
 const WeatherLocation = () => {
-  const { weather } = useContext(ShareContext)
+  const { weatherCity } = useContext(ShareContext)
+
   return (
-    <div className="w-full bg-transparent rounded-xl text-white px-8">
+    <div className="w-full bg-transparent rounded-xl p-8">
       <div>
-        <h2 className="text-[48px] font-bold">{weather.name}</h2>
-        <p>Chance of rain: {30}</p>
+        <h2 className="text-5xl font-bold text-white">{weatherCity.name}</h2>
+        <p className="text-base text-white">Chance of rain: {30}</p>
       </div>
     
     </div>
