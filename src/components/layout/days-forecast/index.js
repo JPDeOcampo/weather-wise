@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { ShareContext } from "@/components/shared/context/share-state";
 import SubHeader from "@/components/shared/subheader";
+import { formatHours } from "@/components/shared/hooks/formattedHours";
 const DaysForecast = () => {
   const { weatherDays } = useContext(ShareContext);
   return (
@@ -16,6 +17,9 @@ const DaysForecast = () => {
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 const optionsCurrent = { year: 'numeric', month: 'long', day: 'numeric' };
                 const formattedDate = new Date(item).toLocaleDateString('en-US',  item === today ? optionsCurrent : options);
+               
+             
+     
                 return (
                   <div className={`h-[200px] w-full px-4 pb-4 flex-shrink-0 border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80`} key={index}>
                     <div className="h-full w-full flex flex-col items-center gap-6">
@@ -23,8 +27,8 @@ const DaysForecast = () => {
                       <div className="h-full w-full grid grid-cols-3 grid-rows-2">
                           <div className="w-full px-4"><p className="text-neutral-white">Chance of rain: {weatherDays?.daily?.precipitation_probability_max[index]}%</p></div>
                           <div className="w-full px-4 border-l-1 border-r-1 border-neutral-white80">icon</div>
-                          <div className="w-full px-4"><p className="text-neutral-white">Sunrise: {weatherDays?.daily?.sunrise[index]}</p>
-                          <p className="text-neutral-white">Sunset: {weatherDays?.daily?.sunrise[index]}</p></div>
+                          <div className="w-full px-4"><p className="text-neutral-white">Sunrise: {formatHours(weatherDays?.daily?.sunrise[index])} </p>
+                          <p className="text-neutral-white">Sunset: {formatHours(weatherDays?.daily?.sunset[index])}</p></div>
                           <div className="w-full px-4">d</div>
                           <div className="w-full px-4 border-l-1 border-r-1 border-neutral-white80 ">title</div>
                           <div className="w-full px-4">d</div>

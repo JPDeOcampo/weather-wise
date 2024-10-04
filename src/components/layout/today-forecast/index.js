@@ -7,7 +7,7 @@ const TodayForecast = () => {
   return (
     <div className="box-container flex flex-col gap-4 h-auto min-h-[180px]">
       <SubHeader title={"Today's Forecast"}/>
-      <div className="container-x-scroll w-full p-4">
+      <div className="container-x-scroll w-full py-4">
         <div className="flex">
           {
             weatherDays?.hourly?.time?.map((item, index) => {
@@ -16,7 +16,7 @@ const TodayForecast = () => {
               const formattedHour = hour % 12 === 0 ? 12 : hour % 12; 
    
               return (
-                <div className={`h-[130px] w-full max-w-36 px-4 flex-shrink-0 ${index === weatherDays?.hourly?.time?.length - 1 ? 'border-0' : 'border border-t-0 border-l-0 border-b-0 border-r-1'}} border-neutral-white80`} key={index}>
+                <div className={`h-[130px] w-full max-w-36 flex-shrink-0 ${index === weatherDays?.hourly?.time?.length - 1 ? 'border-0' : 'border border-t-0 border-l-0 border-b-0 border-r-1'}} border-neutral-white80`} key={index}>
                   <div className="h-full w-full flex flex-col items-center">
                     <p className="text-neutral-white80">{`${formattedHour}:00 ${period}`}</p>
                     <p className="text-neutral-white text-2xl font-medium">{weatherDays?.hourly?.temperature_2m[index]}</p>
