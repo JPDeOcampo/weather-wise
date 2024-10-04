@@ -11,8 +11,12 @@ const WeatherLocation = () => {
           weatherCity.results?.map((item, index) => {
             return (
               <div key={index}>
-                <h2 className="text-5xl font-bold text-white">{item.name}</h2>
-                <p className="text-base text-white">Chance of rain: {weatherDays?.hourly?.precipitation_probability[0]}%</p>
+                <div>
+                <h2 className="text-5xl font-bold text-neutral-white">{`${item.name}, ${item.country}`}</h2>
+                <p className="text-base text-neutral-white">Chance of rain: {weatherDays?.hourly?.precipitation_probability[0]}%</p>
+                  </div>
+              
+                <h3 className="text-5xl font-semibold text-neutral-white">{weatherDays?.hourly?.temperature_2m[0]}</h3>
               </div>
             )
           })

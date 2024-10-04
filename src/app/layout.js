@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
       <body>
         <NextUIProvider className="default relative">
           <ShareState>
-            <main className="bg-primary h-auto min-h-screen">
+            <main className="bg-primary h-auto min-h-lvh">
               {children}
             </main>
           </ShareState>

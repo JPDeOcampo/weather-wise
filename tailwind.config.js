@@ -18,6 +18,7 @@ module.exports = {
               white: "#FFFFFF",
               white80: "#FFFFFF80",
               black: "#000000",
+              darkGrey: "#333333",
               grey: "#767E86",
               grey1: "#F5F6F7",
               blue: "#172432",
@@ -63,7 +64,10 @@ module.exports = {
       },
       gridTemplateRows: {
         'layout': '260px 180px 1fr',
-      }
+      },
+      screens:{
+        'xl-lg': '1460px',
+      },
     },
   },
 };

@@ -2,11 +2,11 @@ import { ENDPOINTS } from "../../../apiConfig";
 import { createQueryParams } from "../hooks";
 
 export async function fetchCoordinates(latitude, longitude, timezone) {
-    const currentArray = ['temperature_2m','relative_humidity_2m','is_day','rain','precipitation'];
-    const hourlyArray = ['precipitation_probability', 'cloud_cover','cloud_cover_low','cloud_cover_mid','cloud_cover_high'];
-    const minutely15Array = ['temperature_2m','precipitation','rain','weather_code','wind_speed_10m','wind_speed_80m,wind_direction_10m','wind_direction_80m','wind_gusts_10m','visibility'];
-    const dailyArray = ['weather_code','sunrise,sunset','uv_index_max','uv_index_clear_sky_max','rain_sum','precipitation_probability_max'];
-    
+    const currentArray = ['temperature_2m', 'relative_humidity_2m', 'is_day', 'rain', 'precipitation', 'weather_code'];
+    const hourlyArray = ['temperature_2m', 'precipitation_probability', , 'weather_code', 'cloud_cover', 'cloud_cover_low', 'cloud_cover_mid', 'cloud_cover_high'];
+    const minutely15Array = ['temperature_2m', 'precipitation', 'rain', 'weather_code', 'wind_speed_10m', 'wind_speed_80m,wind_direction_10m', 'wind_direction_80m', 'wind_gusts_10m', 'visibility'];
+    const dailyArray = ['weather_code', 'sunrise,sunset', 'uv_index_max', 'uv_index_clear_sky_max', 'rain_sum', 'precipitation_probability_max'];
+
     const params = {
         latitude: latitude,
         longitude: longitude,
@@ -18,11 +18,11 @@ export async function fetchCoordinates(latitude, longitude, timezone) {
         timezone: timezone,
         forecast_minutely_15: 24,
     };
-    
+
     const queryString = createQueryParams(params);
-    
+
     const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${ENDPOINTS.forecast}?${queryString}`)}`;
-    
+
     try {
         const response = await fetch(url, {
             method: 'GET',

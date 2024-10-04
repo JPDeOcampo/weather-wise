@@ -1,24 +1,34 @@
 "use client"
 import { useContext } from "react";
 import { ShareContext } from "@/components/shared/context/share-state";
-
+import SubHeader from "@/components/shared/subheader";
 const TodayForecast = () => {
   const { weatherDays } = useContext(ShareContext);
   return (
-    <div className="box-container flex flex-col gap-6 h-auto min-h-[180px]">
-      <h3 className="text-neutral-white80 uppercase">Today's Forecast</h3>
-      <div className="flex px-4">
-        {/* {
-          weatherDays.list.map((day, index) => {
-            return (
-              <div className="h-[130px] w-full max-w-36 border border-t-0 border-l-0 border-b-0 border-r-1 border-neutral-white80">
-                <p></p>
-              </div>
-            );
-          })
-        } */}
+    <div className="box-container flex flex-col gap-4 h-auto min-h-[180px]">
+      <SubHeader title={"Today's Forecast"}/>
+      <div className="container-x-scroll w-full p-4">
+        <div className="flex">
+          {
+            weatherDays?.hourly?.time?.map((item, index) => {
+              const hour = new Date(item).getHours();
+              const period = hour < 12 ? 'AM' : 'PM';
+              const formattedHour = hour % 12 === 0 ? 12 : hour % 12; 
+   
+              return (
+                <div className={`h-[130px] w-full max-w-36 px-4 flex-shrink-0 ${index === weatherDays?.hourly?.time?.length - 1 ? 'border-0' : 'border border-t-0 border-l-0 border-b-0 border-r-1'}} border-neutral-white80`} key={index}>
+                  <div className="h-full w-full flex flex-col items-center">
+                    <p className="text-neutral-white80">{`${formattedHour}:00 ${period}`}</p>
+                    <p className="text-neutral-white text-2xl font-medium">{weatherDays?.hourly?.temperature_2m[index]}</p>
+                  </div>
+                </div>
+              );
+            })
+          }
 
+        </div>
       </div>
+
     </div>
   )
 }
