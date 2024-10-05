@@ -22,6 +22,7 @@ module.exports = {
               grey: "#767E86",
               grey1: "#F5F6F7",
               blue: "#172432",
+              purple: "#742BEC",
             },
             primary: {
               25: "#D3D6DE",  // Very light shade

@@ -33,20 +33,16 @@ const WeatherLocation = () => {
                     <h3 className="text-7xl font-semibold text-neutral-white">{weatherDays?.current?.temperature_2m}</h3>
                     <div className="h-full pt-1"><span className="[&_svg]:text-neutral-white text-base"><FaRegCircle /></span></div>
                   </div>
-
                 </div>
-                <div className="">
-                  <div className="text-end">
-                    <img className="w-full h-full object-cover" src={`/images/icons/large/${weatherDays?.current?.is_day}/${weatherDays?.current?.weather_code}.png`} alt="weather-icons" />
-                    <div className="flex flex-col">
-                      <p className="text-neutral-white text-2xl font-medium">{weatherCode[weatherDays?.current?.weather_code]}</p>
-                      <p className="text-neutral-white80 text-base">Feels Like {weatherDays?.current?.apparent_temperature}</p>
-                    </div>
-
+                <div className="w-64 flex flex-col justify-end items-end text-end">
+                  <div className="h-36 w-36">
+                    <img className="h-full w-full object-cover" src={`/images/icons/large/${weatherDays?.current?.is_day}/${weatherDays?.current?.weather_code}.png`} alt="weather-icons" />
                   </div>
-
+                  <div className="flex flex-col">
+                    <p className="text-neutral-white text-2xl font-medium">{weatherCode[weatherDays?.current?.weather_code]}</p>
+                    <p className="text-neutral-white80 text-base">Feels Like {weatherDays?.current?.apparent_temperature}</p>
+                  </div>
                 </div>
-
               </div>
             )
           })

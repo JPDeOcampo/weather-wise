@@ -19,12 +19,12 @@ export const weatherCode = {
     "73": "Moderate snow fall",
     "75": "Heavy snow fall",
     "77": "Snow grains",
-    "80": "Slight rain showers",
-    "81": "Moderate rain showers",
-    "82": "Violent rain showers",
-    "85": "Slight snow showers",
-    "86": "Heavy snow showers",
+    "80": "Slight rain",
+    "81": "Moderate rain",
+    "82": "Violent rain",
+    "85": "Slight snow",
+    "86": "Heavy snow",
     "95": "Thunderstorm",
-    "96": "Thunderstorm with slight hail",
-    "99": "Thunderstorm with heavy hail"
+    "96": "Thunderstorm", //Thunderstorm with slight hail
+    "99": "Thunderstorm" //Thunderstorm with heavy hail
 }
