@@ -18,8 +18,6 @@ const DaysForecast = () => {
                 const optionsCurrent = { year: 'numeric', month: 'long', day: 'numeric' };
                 const formattedDate = new Date(item).toLocaleDateString('en-US',  item === today ? optionsCurrent : options);
                
-             
-     
                 return (
                   <div className={`h-[200px] w-full px-4 pb-4 flex-shrink-0 border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80`} key={index}>
                     <div className="h-full w-full flex flex-col items-center gap-6">
