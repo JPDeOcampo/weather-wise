@@ -1,9 +1,8 @@
-import SideBar from "@/components/layout/sidebar";
 import Search from "@/components/layout/search";
 import WeatherLocation from "@/components/layout/weather-location";
 import TodayForecast from "@/components/layout/today-forecast";
-import AirConditions from "@/components/layout/air-conditions";
 import DaysForecast from "@/components/layout/days-forecast";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
           <div className="flex flex-col gap-6">
             <WeatherLocation />
             <TodayForecast />
-            {/* <AirConditions /> */}
           </div>
           <DaysForecast />
         </div>

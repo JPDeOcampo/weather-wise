@@ -24,13 +24,15 @@ const ShareState = ({ children }) => {
               return fetchCoordinates(latitude, longitude, timezone);
             });
             const responses = await Promise.all(result);
-            setWeatherDays(...responses);
+            if(responses){
+              setWeatherDays(...responses);
+              setLoading(false);
+            }
+            
           }catch(error){
             console.log(error);
           } 
         }
-        
-
       } catch (err) {
         setError(err.message);
       }
@@ -46,12 +48,16 @@ const ShareState = ({ children }) => {
     weatherCity,
     setCity,
     weatherDays,
+    loading,
+    setLoading,
   }), [
     location,
     setLocation,
     weatherCity,
     setCity,
     weatherDays,
+    loading,
+    setLoading,
   ])
   return (
     <ShareContext.Provider value={contextValue}>
