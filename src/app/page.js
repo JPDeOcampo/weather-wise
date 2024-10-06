@@ -7,11 +7,15 @@ import DaysForecast from "@/components/layout/days-forecast";
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-layout p-6 gap-6 h-auto">
-      <SideBar />
+    <div className="w-full max-w-7xl mx-auto relative p-6 h-auto">
       <div className="flex flex-col w-full gap-6 h-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 h-auto">
-          <Search />
+          {/* <div className="flex w-full items-center gap-8">
+            <div>
+              <img src="/images/icons/logo.png" alt="logo" />
+            </div> */}
+            <Search />
+          {/* </div> */}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
           <div className="flex flex-col gap-6">
@@ -21,7 +25,6 @@ export default function Home() {
           </div>
           <DaysForecast />
         </div>
-
       </div>
 
     </div>

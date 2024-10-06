@@ -19,7 +19,7 @@ const Search = () => {
 
   }
   return (
-    <div className='box-container'>
+    <div className='box-container w-full'>
       <input type="text" className="bg-transparent w-full h-full text-neutral-white outline-transparent border-0" placeholder="Search for cities..." value={searchQuery} onChange={(e) => handleSearchQuery(e)} onKeyDown={(e) => handleKeydown(e)}/>
     </div>
   )

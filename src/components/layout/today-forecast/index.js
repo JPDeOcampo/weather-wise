@@ -10,7 +10,7 @@ const TodayForecast = () => {
     <div className="box-container flex flex-col gap-4 h-auto min-h-[180px]">
       <SubHeader title={"Today's Forecast"} />
       <div className="container-x-scroll w-full py-4">
-        <div className="flex pb-4">
+        <div className="flex pb-4 relative -left-4">
           {
             weatherDays?.hourly?.time?.map((item, index) => {
               const hour = new Date(item).getHours();
