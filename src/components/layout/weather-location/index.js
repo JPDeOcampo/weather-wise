@@ -1,13 +1,13 @@
 "use client"
 import { useContext } from "react";
 import { ShareContext } from "@/components/shared/context/share-state";
-import { FaRegCircle } from "react-icons/fa";
 import { weatherCode } from "@/components/shared/constant";
+
 const WeatherLocation = () => {
   const { weatherCity, weatherDays } = useContext(ShareContext)
   console.log(weatherDays)
   return (
-    <div className="w-full bg-transparent rounded-xl p-8 h-auto min-h-[260px]">
+    <div className="w-full bg-transparent rounded-xl p-6 h-auto min-h-[260px]">
       <div>
         {
           weatherCity.results?.map((item, index) => {
@@ -29,9 +29,21 @@ const WeatherLocation = () => {
                     <p className="text-4xl font-medium text-neutral-white">{dayOfWeek}</p>
                     <p className="text-base text-neutral-white80">{formattedDate}</p>
                   </div> */}
-                  <div className="w-full flex gap-2">
-                    <h3 className="text-5xl md:text-7xl font-semibold text-neutral-white">{weatherDays?.current?.temperature_2m}</h3>
-                    <div className="h-full pt-1"><span className="[&_svg]:text-neutral-white text-base"><FaRegCircle /></span></div>
+                  <div className="flex flex-col gap-2">
+                    <div className="w-full flex gap-2">
+                      <h3 className="text-5xl md:text-7xl font-semibold text-neutral-white">{weatherDays?.current?.temperature_2m}</h3>
+                      <div className="h-full pt-1"><span className="border-4 border-neutral-white w-5 h-5 block rounded-full"></span></div>
+                    </div>
+                    <div className="flex gap-2">
+                      <div className="flex gap-1">
+                        <p className="text-base text-neutral-white80">High: {weatherDays?.daily?.apparent_temperature_max[0]}</p>
+                        <div className="h-full w-auto pt-1"><span className="border-2 border-neutral-white80 w-2 h-2 block rounded-full"></span></div>
+                      </div>
+                      <div className="flex gap-1">
+                        <p className="text-base text-neutral-white80">Low: {weatherDays?.daily?.apparent_temperature_min[0]}</p>
+                        <div className="h-full w-auto pt-1"><span className="border-2 border-neutral-white80 w-2 h-2 block rounded-full"></span></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="w-full max-w-64 flex flex-col justify-end items-end text-end">
@@ -40,7 +52,10 @@ const WeatherLocation = () => {
                   </div>
                   <div className="flex flex-col">
                     <p className="text-neutral-white text-2xl font-medium">{weatherCode[weatherDays?.current?.weather_code]}</p>
-                    <p className="text-neutral-white80 text-base">Feels Like {weatherDays?.current?.apparent_temperature}</p>
+                    <div className="flex gap-1">
+                      <p className="text-neutral-white80 text-base">Feels Like {weatherDays?.current?.apparent_temperature}</p>
+                      <div className="h-full w-auto pt-1"><span className="border-2 border-neutral-white80 w-2 h-2 block rounded-full"></span></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -48,7 +63,6 @@ const WeatherLocation = () => {
           })
         }
       </div>
-
     </div>
   )
 }

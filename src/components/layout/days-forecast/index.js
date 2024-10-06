@@ -39,7 +39,7 @@ const DaysContainer = ({ item, index, today, weatherDays, weatherCode }) => {
 const DaysForecast = () => {
   const { weatherDays } = useContext(ShareContext);
   return (
-    <div className="box-container right-container flex flex-col gap-4 h-[775px]">
+    <div className="box-container flex flex-col gap-4 h-[775px]">
       <div className="box-container-blu flex flex-col gap-4 h-full">
         <SubHeader title={"7 Day's Forecast"} />
         <div className="container-y-scroll w-full pt-4 pr-3">

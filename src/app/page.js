@@ -21,7 +21,7 @@ export default function Home() {
           <div className="flex flex-col gap-6">
             <WeatherLocation />
             <TodayForecast />
-            <AirConditions />
+            {/* <AirConditions /> */}
           </div>
           <DaysForecast />
         </div>
