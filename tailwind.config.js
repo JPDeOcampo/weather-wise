@@ -23,6 +23,7 @@ module.exports = {
               grey1: "#F5F6F7",
               blue: "#172432",
               purple: "#742BEC",
+              purple80: "#742BEC80",
             },
             primary: {
               25: "#D3D6DE",  // Very light shade
