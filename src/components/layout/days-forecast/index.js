@@ -7,13 +7,13 @@ import { weatherCode } from "@/components/shared/constant";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
 import { SunIcon } from "../../../../public/images/icons";
 
-const DaysContainer = ({ item, index, weatherDays, weatherCode }) => {
+const DaysContainer = ({ item, index, today, weatherDays, weatherCode }) => {
   // const today = new Date().toISOString().split('T')[0];
   // const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   // const optionsCurrent = { year: 'numeric', month: 'long', day: 'numeric' };
   // const formattedDate = new Date(item).toLocaleDateString('en-US', item === today ? optionsCurrent : options);
 
-  const today = new Date().toISOString().split('T')[0];
+ 
   const dateObject = new Date(item);
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const formattedDate = dateObject.toLocaleDateString('en-US', options);
@@ -72,16 +72,31 @@ const DaysForecast = () => {
           <div className="flex flex-col gap-4 [&_>div]:!px-0">
             {
               weatherDays?.daily?.time?.map((item, index) => {
+                const today = new Date().toISOString().split('T')[0];
                 return (
-                  <Accordion>
+                  <Accordion key={index}>
                     <AccordionItem
-                      key="sun"
-                      aria-label="Sun"
+                      aria-label="Weather"
                       className={"[&_>h2>button>div]:!flex-shrink [&_>h2>button>div]:w-full border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80"}
                       indicator={<SunIcon />}
-                      startContent={<DaysContainer item={item} index={index} weatherDays={weatherDays} weatherCode={weatherCode} />}
+                      startContent={<DaysContainer item={item} index={index} today={today} weatherDays={weatherDays} weatherCode={weatherCode} />}
                     >
-                      ds
+                      <div className="w-full grid grid-cols-3 gap-6">
+                        <div className="w-full flex items-end gap-4">
+                        <img src={`/images/icons/sunset-sunrise/png/sunrise-dark.png`} alt="weather-icons" />
+                          <p className="text-neutral-white text-sm leading-3">Sunrise: {formatHours(weatherDays?.daily?.sunrise[index])} </p>
+                        </div>
+                        <div className="w-full">
+                          {
+                            today !== item && <p className="text-neutral-white text-sm">Chance of rain: {weatherDays?.daily?.precipitation_probability_max[index]}%</p>
+                          }
+                        </div>
+                        <div className="w-full flex items-end justify-end gap-4 pr-12">
+                        <img src={`/images/icons/sunset-sunrise/png/sunset-dark.png`} alt="weather-icons" />
+                          <p className="text-neutral-white text-sm leading-3">Sunset: {formatHours(weatherDays?.daily?.sunset[index])}</p>
+                         
+                        </div>
+                      </div>
                     </AccordionItem>
                   </Accordion>
                 );
