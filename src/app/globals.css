@@ -71,6 +71,7 @@ input {
   outline: transparent;
   @apply outline-transparent;
 }
+.days-forecast-icon,
 .today-forecast-icon{
-  @apply [&_svg]:text-lg text-neutral-white80;
+  @apply [&_svg]:text-2xl text-neutral-white80;
 }

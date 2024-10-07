@@ -8,19 +8,24 @@ import { TbUvIndex } from "react-icons/tb";
 import { FaCloud } from "react-icons/fa";
 import BoxContainer from "@/components/shared/container";
 import SkeletonLoading from "@/components/shared/skeleton-loading";
+import FormatTimeHooks from "@/components/shared/hooks/format-time";
 
 const TodayForecast = () => {
   const { weatherDays, loading } = useContext(ShareContext);
   const [isHourly, setIsHourly] = useState(true);
-  const todayForecastValueClass = "text-neutral-white pl-7 text-lg"
+  const todayForecastValueClass = "text-neutral-white pl-8 text-lg"
+
+  const { formatSeconds, formatHours } = FormatTimeHooks();
 
   const loadingSkeleton = 3;
+
+  const { hours, minutes, seconds } = formatSeconds(weatherDays?.daily?.daylight_duration[0]);
 
   return (
     <BoxContainer className="flex flex-col gap-4 h-auto min-h-[487px]">
       <SubHeader title={"Today's Forecast"} />
       <div className="flex flex-col h-full justify-between">
-        <div className="h-full w-full grid grid-cols-2 gap-4 grid-rows-2 p-2 md:p-4 mb-4 border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80">
+        <div className="h-full w-full grid grid-cols-2 lg:grid-cols-3 gap-4 grid-rows-2 p-2 md:p-4 mb-4 border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80">
           <div>
             <div className="flex gap-2 items-center">
               <span className="today-forecast-icon"><FaCloud /></span>
@@ -28,7 +33,7 @@ const TodayForecast = () => {
             </div>
             {
               loading ? (
-                <div className="pl-7">
+                <div className="pl-8">
                   <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
@@ -43,7 +48,7 @@ const TodayForecast = () => {
             </div>
             {
               loading ? (
-                <div className="pl-7">
+                <div className="pl-8">
                   <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
@@ -58,7 +63,7 @@ const TodayForecast = () => {
             </div>
             {
               loading ? (
-                <div className="pl-7">
+                <div className="pl-8">
                   <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
@@ -73,11 +78,41 @@ const TodayForecast = () => {
             </div>
             {
               loading ? (
-                <div className="pl-7">
+                <div className="pl-8">
                   <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
                 <p className={todayForecastValueClass}>{weatherDays?.daily?.uv_index_max[0]}</p>
+              )
+            }
+          </div>
+          <div>
+            <div className="flex gap-2 items-center">
+              <img className="relative -top-1" src={`/images/icons/sunset-sunrise/png/sunrise-dark.png`} alt="weather-icons" />
+              <p className="text-neutral-white80">Sunrise</p>
+            </div>
+            {
+              loading ? (
+                <div className="pl-8">
+                  <SkeletonLoading width={80} height={20} />
+                </div>
+              ) : (
+                <p className={todayForecastValueClass}>{formatHours(weatherDays?.daily?.sunrise[0])}</p>
+              )
+            }
+          </div>
+          <div>
+            <div className="flex gap-2 items-center">
+              <img className="relative -top-1" src={`/images/icons/sunset-sunrise/png/sunset-dark.png`} alt="weather-icons" />
+              <p className="text-neutral-white80">Sunset</p>
+            </div>
+            {
+              loading ? (
+                <div className="pl-8">
+                  <SkeletonLoading width={80} height={20} />
+                </div>
+              ) : (
+                <p className={todayForecastValueClass}>{formatHours(weatherDays?.daily?.sunset[0])}</p>
               )
             }
           </div>
@@ -86,8 +121,11 @@ const TodayForecast = () => {
         {/* Today Hourly/Minutely Forecast */}
 
         <div>
-          <div className="flex justify-end items-center pt-2 pb-3 px-2">
-            <button className="text-neutral-white text-xs uppercase font-medium bg-neutral-purple py-1 px-4 hover:bg-neutral-purple80 rounded-full" onClick={() => setIsHourly(!isHourly)}>{isHourly ? 'Hourly' : 'Minutely'}</button>
+          <div className="flex flex-col lg:flex-row justify-between lg:items-center pt-2 pb-3 px-2 gap-4">
+            <p className="font-medium"><span className="text-neutral-white80">Length of the day: </span><span className="text-neutral-white">{hours}h {minutes}m {seconds}s</span></p>
+            <div className="flex justify-end items-center">
+              <button className="text-neutral-white text-xs uppercase font-medium bg-neutral-purple py-1 px-4 hover:bg-neutral-purple80 rounded-full" onClick={() => setIsHourly(!isHourly)}>{isHourly ? 'Hourly' : 'Minutely'}</button>
+            </div>
           </div>
           <div className="!p-3">
 

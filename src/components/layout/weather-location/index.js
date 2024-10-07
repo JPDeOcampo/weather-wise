@@ -8,7 +8,7 @@ const WeatherLocation = () => {
   const { weatherCity, weatherDays, loading, darkMode } = useContext(ShareContext);
   
   return (
-    <div className="w-full bg-transparent rounded-xl p-6 h-auto min-h-[260px]">
+    <div className="w-full bg-transparent rounded-xl p-4 md:p-6 h-auto min-h-[260px]">
       <div>
         {
           loading ? (
