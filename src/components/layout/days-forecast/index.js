@@ -31,10 +31,10 @@ const DaysContainer = ({ item, index, today, weatherDays, weatherCode }) => {
         <div className="w-full flex justify-start text-start">
           <p className="text-neutral-white80 text-sm lg:text-base">{item === today ? `Today` : dayOfWeek}</p>
         </div>
-        <div className="w-full flex gap-4 items-center">
+        <div className="w-full flex gap-4 items-center justify-center md:justify-start">
           <img src={`/images/icons/small/1/${weatherDays?.daily?.weather_code[index]}.png`} alt="weather-icons" />
           <div className="w-auto text-start">
-            <p className="text-neutral-white80 text-sm lg:text-base hidden md:block">{weatherCode[weatherDays?.daily?.weather_code[index]]}</p>
+            <p className="text-neutral-white80 text-sm lg:text-base hidden sm:block">{weatherCode[weatherDays?.daily?.weather_code[index]]}</p>
           </div>
         </div>
         <div className="w-full flex justify-end text-end">
@@ -67,7 +67,7 @@ const DaysForecast = () => {
               }
             </div>
           ) : (
-            <div className="lg:container-y-scroll w-full pt-4 pr-0 md:pr-3">
+            <div className="container-y-scroll w-full pt-4 pr-0 md:pr-3">
               <div className="flex flex-col gap-4 [&_>div]:!px-0">
                 {
                   weatherDays?.daily?.time?.map((item, index) => {

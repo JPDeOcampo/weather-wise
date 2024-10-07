@@ -45,7 +45,7 @@ body {
 
 .container-x-scroll,
 .container-y-scroll{
-  @apply overflow-auto;
+  @apply overflow-hidden lg:overflow-auto;
 }
 
 .container-y-scroll::-webkit-scrollbar {
