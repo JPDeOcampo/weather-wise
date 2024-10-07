@@ -10,7 +10,7 @@ export async function fetchLocation(latitude, longitude) {
 
     const queryString = createQueryParams(params);
 
-    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${ENDPOINTS.reverse_geocoding}?${queryString }`)}`;
+    const url = `/api/proxy?url=${encodeURIComponent(`${ENDPOINTS.reverse_geocoding}?${queryString }`)}`;
  
     try {
         const response = await fetch(url, {

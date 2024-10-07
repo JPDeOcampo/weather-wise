@@ -12,7 +12,7 @@ export async function fetchWeather(city) {
     };
 
     const queryString = createQueryParams(params);
-    const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${ENDPOINTS.city}?${queryString}`)}`;
+    const url = `/api/proxy?url=${encodeURIComponent(`${ENDPOINTS.city}?${queryString}`)}`;
 
     try {
         const response = await fetch(url, {
