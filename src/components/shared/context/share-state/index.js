@@ -12,6 +12,8 @@ const ShareState = ({ children }) => {
 
   const [loading, setLoading] = useState(true);
 
+  const [darkMode, setDarkMode] = useState(true);
+
   useEffect(() => {
     async function getWeather() {
       try {
@@ -24,14 +26,14 @@ const ShareState = ({ children }) => {
               return fetchCoordinates(latitude, longitude, timezone);
             });
             const responses = await Promise.all(result);
-            if(responses){
+            if (responses) {
               setWeatherDays(...responses);
               setLoading(false);
             }
-            
-          }catch(error){
+
+          } catch (error) {
             console.log(error);
-          } 
+          }
         }
       } catch (err) {
         setError(err.message);
@@ -50,6 +52,8 @@ const ShareState = ({ children }) => {
     weatherDays,
     loading,
     setLoading,
+    darkMode, 
+    setDarkMode,
   }), [
     location,
     setLocation,
@@ -58,6 +62,8 @@ const ShareState = ({ children }) => {
     weatherDays,
     loading,
     setLoading,
+    darkMode, 
+    setDarkMode,
   ])
   return (
     <ShareContext.Provider value={contextValue}>

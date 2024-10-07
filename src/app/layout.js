@@ -1,6 +1,6 @@
-import { NextUIProvider } from "@nextui-org/react";
 import "./globals.css";
 import ShareState from "@/components/shared/context/share-state";
+import InnerLayout from "@/components/shared/inner-layout";
 
 export const metadata = {
   title: "WeatherWise",
@@ -11,14 +11,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <NextUIProvider className="default relative">
-          <ShareState>
-            <main className="bg-primary h-auto min-h-lvh">
+        <ShareState>
+            <InnerLayout>
               {children}
-            </main>
-          </ShareState>
-        </NextUIProvider>
+            </InnerLayout>
+        </ShareState>
       </body>
     </html>
   );
 }
+
+

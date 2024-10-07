@@ -6,28 +6,18 @@ import { FaWind } from "react-icons/fa6";
 import { WiHumidity } from "react-icons/wi";
 import { TbUvIndex } from "react-icons/tb";
 import { FaCloud } from "react-icons/fa";
-import Skeleton from "react-loading-skeleton";
-
-const TodayForecastSkeleton = ({ width, height }) => {
-  return (
-    <Skeleton
-      baseColor="#e5e5e5"
-      highlightColor="#a9a9a9"
-      width={width}
-      height={height}
-    />
-  );
-}
+import BoxContainer from "@/components/shared/container";
+import SkeletonLoading from "@/components/shared/skeleton-loading";
 
 const TodayForecast = () => {
   const { weatherDays, loading } = useContext(ShareContext);
   const [isHourly, setIsHourly] = useState(true);
   const todayForecastValueClass = "text-neutral-white pl-7 text-lg"
 
-  const loadingSkeleton = 4;
+  const loadingSkeleton = 3;
 
   return (
-    <div className="box-container flex flex-col gap-4 h-auto min-h-[487px]">
+    <BoxContainer className="flex flex-col gap-4 h-auto min-h-[487px]">
       <SubHeader title={"Today's Forecast"} />
       <div className="flex flex-col h-full justify-between">
         <div className="h-full w-full grid grid-cols-2 gap-4 grid-rows-2 p-2 md:p-4 mb-4 border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80">
@@ -39,7 +29,7 @@ const TodayForecast = () => {
             {
               loading ? (
                 <div className="pl-7">
-                  <TodayForecastSkeleton width={80} height={20} />
+                  <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
                 <p className={todayForecastValueClass}>{weatherDays?.current?.cloud_cover}%</p>
@@ -54,7 +44,7 @@ const TodayForecast = () => {
             {
               loading ? (
                 <div className="pl-7">
-                  <TodayForecastSkeleton width={80} height={20} />
+                  <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
                 <p className={todayForecastValueClass}>{weatherDays?.current?.wind_speed_10m} km/h</p>
@@ -69,7 +59,7 @@ const TodayForecast = () => {
             {
               loading ? (
                 <div className="pl-7">
-                  <TodayForecastSkeleton width={80} height={20} />
+                  <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
                 <p className={todayForecastValueClass}>{weatherDays?.current?.relative_humidity_2m}%</p>
@@ -84,7 +74,7 @@ const TodayForecast = () => {
             {
               loading ? (
                 <div className="pl-7">
-                  <TodayForecastSkeleton width={80} height={20} />
+                  <SkeletonLoading width={80} height={20} />
                 </div>
               ) : (
                 <p className={todayForecastValueClass}>{weatherDays?.daily?.uv_index_max[0]}</p>
@@ -99,7 +89,7 @@ const TodayForecast = () => {
           <div className="flex justify-end items-center pt-2 pb-3 px-2">
             <button className="text-neutral-white text-xs uppercase font-medium bg-neutral-purple py-1 px-4 hover:bg-neutral-purple80 rounded-full" onClick={() => setIsHourly(!isHourly)}>{isHourly ? 'Hourly' : 'Minutely'}</button>
           </div>
-          <div className="box-container-blur !p-3">
+          <div className="!p-3">
 
             <div className="container-x-scroll w-full py-2">
               {
@@ -108,11 +98,11 @@ const TodayForecast = () => {
                     {
                       [...Array(loadingSkeleton)].map((_, index) => {
                         return (
-                          <div className={`h-[130px] w-full max-w-36 flex-shrink-0 ${index === [...Array(loadingSkeleton)].length - 1 ? 'border-0' : 'border border-t-0 border-l-0 border-b-0 border-r-1'}} border-neutral-white80`} key={index}>
-                            <div className="h-auto w-full flex flex-col items-center gap-3">
-                              <TodayForecastSkeleton width={80} height={20} />
-                              <TodayForecastSkeleton width={80} height={40} />
-                              <TodayForecastSkeleton width={80} height={20} />
+                          <div className={`h-[130px] w-full max-w-44 flex-shrink-0 ${index === [...Array(loadingSkeleton)].length - 1 ? 'border-0' : 'border border-t-0 border-l-0 border-b-0 border-r-1'}} border-neutral-white80`} key={index}>
+                            <div className="h-auto w-full flex flex-col items-center gap-2">
+                              <SkeletonLoading width={120} height={20} />
+                              <SkeletonLoading width={120} height={50} />
+                              <SkeletonLoading width={120} height={20} />
                             </div>
                           </div>
                         )
@@ -180,7 +170,7 @@ const TodayForecast = () => {
           </div>
         </div>
       </div>
-    </div>
+    </BoxContainer>
   )
 }
 

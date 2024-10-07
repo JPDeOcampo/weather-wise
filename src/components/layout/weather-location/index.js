@@ -2,54 +2,24 @@
 import { useContext } from "react";
 import { ShareContext } from "@/components/shared/context/share-state";
 import { weatherCode } from "@/components/shared/constant";
-import Skeleton from "react-loading-skeleton";
-
-const LocationForecastSkeleton = ({ count, width, height }) => {
-  return (
-    <Skeleton
-      baseColor="#e5e5e5"
-      highlightColor="#a9a9a9"
-      count={count}
-      width={width}
-      height={height}
-    />
-  );
-}
+import HashLoader from "react-spinners/HashLoader";
 
 const WeatherLocation = () => {
-  const { weatherCity, weatherDays, loading } = useContext(ShareContext)
+  const { weatherCity, weatherDays, loading, darkMode } = useContext(ShareContext);
   console.log(weatherDays)
   return (
     <div className="w-full bg-transparent rounded-xl p-6 h-auto min-h-[260px]">
       <div>
         {
           loading ? (
-            <div className="flex gap-4 md:gap-0 justify-between w-full">
-              <div className="flex flex-col gap-4 md:gap-0 justify-between min-h-[200px]">
-                <div className="flex flex-col gap-2">
-                  <LocationForecastSkeleton count={2} height={20} />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <LocationForecastSkeleton count={1} height={60} />
-                  <div className="flex flex-col md:flex-row gap-2">
-                    <div className="flex gap-1">
-                      <p className="text-base text-neutral-white80">High:</p>
-                      <LocationForecastSkeleton count={1} height={20} width={40} />
-                    </div>
-                    <div className="flex gap-1">
-                      <p className="text-base text-neutral-white80">Low:</p>
-                      <LocationForecastSkeleton count={1} height={20} width={40} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-full max-w-64 flex flex-col justify-end items-end text-end gap-1">
-                <LocationForecastSkeleton count={1} height={80} width={120} />
-                <LocationForecastSkeleton height={20} width={100} />
-                <LocationForecastSkeleton height={20} width={80} />
-                <LocationForecastSkeleton height={20} width={80} />
-              </div>
+            <div className="flex justify-center items-center w-full min-h-[200px]">
+              <HashLoader
+                loading="loading"
+                color={`${darkMode ? '#14203b' : '#396feb'}`}
+                size={40}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
             </div>
           ) : (
             <>
