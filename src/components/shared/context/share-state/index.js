@@ -2,17 +2,40 @@
 import { createContext, useMemo, useState, useEffect } from 'react';
 import { fetchWeather } from '@/services/api/cityService';
 import { fetchCoordinates } from '@/services/api/coordinatesService';
+import { fetchLocation } from '@/services/api/locationService';
 
 export const ShareContext = createContext();
 const ShareState = ({ children }) => {
   const [weatherCity, setWeatherCity] = useState({});
   const [weatherDays, setWeatherDays] = useState();
-  const [location, setLocation] = useState(false);
-  const [city, setCity] = useState('manila');
+
+  const [city, setCity] = useState('');
 
   const [loading, setLoading] = useState(true);
 
   const [darkMode, setDarkMode] = useState(true);
+
+  const locations = async (latitude, longitude) => {
+    try {
+      const data = await fetchLocation(latitude, longitude);
+      setCity(data.features[0].properties.city);
+    } catch (error) {
+      console.log(error, 'fetch-location');
+    }
+  }
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          locations(position.coords.latitude, position.coords.longitude)
+        },
+        (error) => {
+          console.log(error, 'geo-location')
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     async function getWeather() {
@@ -39,30 +62,28 @@ const ShareState = ({ children }) => {
         setError(err.message);
       }
     }
+    if (city !== '') {
+      getWeather();
+    }
 
-    getWeather();
   }, [city]);
 
   console.log(weatherCity, weatherDays)
   const contextValue = useMemo(() => ({
-    location,
-    setLocation,
     weatherCity,
     setCity,
     weatherDays,
     loading,
     setLoading,
-    darkMode, 
+    darkMode,
     setDarkMode,
   }), [
-    location,
-    setLocation,
     weatherCity,
     setCity,
     weatherDays,
     loading,
     setLoading,
-    darkMode, 
+    darkMode,
     setDarkMode,
   ])
   return (

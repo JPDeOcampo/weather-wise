@@ -43,9 +43,12 @@ body {
   @apply bg-neutral-white;
 }
 
-.container-x-scroll,
+.container-x-scroll{
+  @apply overflow-x-auto;
+}
+
 .container-y-scroll{
-  @apply overflow-hidden lg:overflow-auto;
+  @apply overflow-hidden lg:overflow-y-auto;
 }
 
 .container-y-scroll::-webkit-scrollbar {
@@ -61,7 +64,7 @@ body {
   @apply rounded-xl p-6;
 }
 .box-container-blur {
-  @apply bg-black/20 rounded-xl p-6 backdrop-blur-3xl;
+  @apply bg-black/30 rounded-xl p-6;
 }
 
 input {

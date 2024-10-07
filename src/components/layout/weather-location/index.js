@@ -6,7 +6,7 @@ import HashLoader from "react-spinners/HashLoader";
 
 const WeatherLocation = () => {
   const { weatherCity, weatherDays, loading, darkMode } = useContext(ShareContext);
-  console.log(weatherDays)
+  
   return (
     <div className="w-full bg-transparent rounded-xl p-6 h-auto min-h-[260px]">
       <div>
@@ -38,7 +38,7 @@ const WeatherLocation = () => {
                         <div className="flex flex-col gap-2">
 
                           <h2 className="text-2xl md:text-5xl font-bold text-neutral-white">{`${item.name}, ${item.country_code}`}</h2>
-                          <p className="text-sm md:text-base text-neutral-white80">Chance of rain: {weatherDays?.hourly?.precipitation_probability[0]}%</p>
+                          <p className="text-sm md:text-base text-neutral-white80">Chance of rain for the current hour: {weatherDays?.hourly?.precipitation_probability[0]}%</p>
                         </div>
                         {/* <div>
                     <p className="text-4xl font-medium text-neutral-white">{dayOfWeek}</p>
