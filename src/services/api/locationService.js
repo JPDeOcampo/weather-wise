@@ -5,7 +5,7 @@ export async function fetchLocation(latitude, longitude) {
     const params = {
         lat: latitude,
         lon: longitude,
-        apiKey: process.env.GEOAPIFY_KEY,
+        apiKey: process.env.NEXT_PUBLIC_GEOAPIFY_KEY,
     };
 
     const queryString = createQueryParams(params);
