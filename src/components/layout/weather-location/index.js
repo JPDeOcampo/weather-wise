@@ -66,7 +66,7 @@ const WeatherLocation = () => {
                           <img className="h-full w-full" src={`/images/icons/large/${weatherDays?.current?.is_day}/${weatherDays?.current?.weather_code}.png`} alt="weather-icons" />
                         </div>
                         <div className="flex flex-col">
-                          <p className="text-neutral-white text-2xl font-medium">{weatherCode[weatherDays?.current?.weather_code]}</p>
+                          <p className="text-neutral-white text-2xl truncate font-medium w-44" title={weatherCode[weatherDays?.current?.weather_code]}>{weatherCode[weatherDays?.current?.weather_code]}</p>
                           <div className="flex justify-end gap-1">
                             <p className="text-neutral-white80 text-base">Feels Like {weatherDays?.current?.apparent_temperature}</p>
                             <div className="h-full w-auto pt-1"><span className="border-2 border-neutral-white80 w-2 h-2 block rounded-full"></span></div>

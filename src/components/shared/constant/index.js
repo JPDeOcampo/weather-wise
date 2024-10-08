@@ -25,6 +25,6 @@ export const weatherCode = {
     "85": "Slight snow",
     "86": "Heavy snow",
     "95": "Thunderstorm",
-    "96": "Thunderstorm", //Thunderstorm with slight hail
-    "99": "Thunderstorm" //Thunderstorm with heavy hail
+    "96": "Thunderstorm with slight hail",
+    "99": "Thunderstorm with slight hail",
 }

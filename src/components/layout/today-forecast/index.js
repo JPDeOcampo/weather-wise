@@ -122,7 +122,15 @@ const TodayForecast = () => {
 
         <div>
           <div className="flex flex-col lg:flex-row justify-between lg:items-center pt-2 pb-3 px-2 gap-4">
-            <p className="font-medium"><span className="text-neutral-white80">Length of the day: </span><span className="text-neutral-white">{hours}h {minutes}m {seconds}s</span></p>
+            <p className="font-medium"><span className="text-neutral-white80">Length of the day: </span>
+              {
+                loading ? (
+                  <SkeletonLoading width={90} height={20} />
+                ) : (
+                  <span className="text-neutral-white">{hours}h {minutes}m {seconds}s</span>
+                )
+              }
+            </p>
             <div className="flex justify-end items-center">
               <button className="text-neutral-white text-xs uppercase font-medium bg-neutral-purple py-1 px-4 hover:bg-neutral-purple80 rounded-full" onClick={() => setIsHourly(!isHourly)}>{isHourly ? 'Hourly' : 'Minutely'}</button>
             </div>

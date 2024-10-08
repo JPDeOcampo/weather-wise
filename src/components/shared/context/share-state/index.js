@@ -3,6 +3,7 @@ import { createContext, useMemo, useState, useEffect } from 'react';
 import { fetchWeather } from '@/services/api/cityService';
 import { fetchCoordinates } from '@/services/api/coordinatesService';
 import { fetchLocation } from '@/services/api/locationService';
+import { useRouter } from 'next/navigation';
 
 export const ShareContext = createContext();
 const ShareState = ({ children }) => {
@@ -20,8 +21,20 @@ const ShareState = ({ children }) => {
 
   const [isNoResult, setIsNoResult] = useState(false);
 
+  const [refresh, setRefresh] = useState(true);
+
+  const [isClearVisible, setIsClearVisible] = useState(false);
+
+  const router = useRouter();
+
   const handleRefresh = () => {
-    window.location.reload();
+    setRefresh(!refresh);
+    setLoading(true);
+    router.refresh();
+    setCity('');
+    setIsNoResult(false);
+    setIsError(false);
+    setSearchQuery('');
   };
 
   const locations = async (latitude, longitude) => {
@@ -46,7 +59,7 @@ const ShareState = ({ children }) => {
         }
       );
     }
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     async function getWeather() {
@@ -70,9 +83,10 @@ const ShareState = ({ children }) => {
               const responses = await Promise.all(result);
               if (responses) {
                 setWeatherDays(...responses);
+                setIsClearVisible(false);
+                setSearchQuery('');
                 setLoading(false);
               }
-
             } catch (error) {
               setIsError(true);
               console.error(error.message);
@@ -89,7 +103,6 @@ const ShareState = ({ children }) => {
     }
   }, [city]);
 
-  console.log(weatherCity, weatherDays)
   const contextValue = useMemo(() => ({
     weatherCity,
     city,
@@ -103,9 +116,11 @@ const ShareState = ({ children }) => {
     isError,
     isNoResult,
     setIsNoResult,
-    searchQuery,
+    searchQuery, 
     setSearchQuery,
     handleRefresh,
+    isClearVisible, 
+    setIsClearVisible,
   }), [
     weatherCity,
     city,
@@ -119,9 +134,11 @@ const ShareState = ({ children }) => {
     isError,
     setIsNoResult,
     isNoResult,
-    searchQuery,
+    searchQuery, 
     setSearchQuery,
     handleRefresh,
+    isClearVisible, 
+    setIsClearVisible,
   ])
   return (
     <ShareContext.Provider value={contextValue}>

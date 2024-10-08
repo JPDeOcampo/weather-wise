@@ -13,7 +13,7 @@ import FormatTimeHooks from "@/components/shared/hooks/format-time";
 import { IoTimeSharp } from "react-icons/io5";
 import { TbUvIndex } from "react-icons/tb";
 
-const DaysContainer = ({ item, index, today, weatherDays, weatherCode }) => {
+const DaysContainer = ({ item, index, today, weatherDays }) => {
   const is2xMobile = Is2xMobile();
   const dateObject = new Date(item);
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -27,7 +27,6 @@ const DaysContainer = ({ item, index, today, weatherDays, weatherCode }) => {
   // Get the day of the week separately
   const dayOfWeek = dateObject.toLocaleDateString('en-US', { weekday: `${is2xMobile ? 'short' : 'long'}` });
 
-
   return (
     <div className={`h-auto w-full`} key={index}>
       <div className="h-auto w-full grid grid-cols-3 items-center gap-6">
@@ -35,9 +34,9 @@ const DaysContainer = ({ item, index, today, weatherDays, weatherCode }) => {
           <p className="text-neutral-white80 text-sm lg:text-base">{item === today ? `Today` : dayOfWeek}</p>
         </div>
         <div className="w-full flex gap-4 items-center justify-center">
-          <img src={`/images/icons/small/1/${weatherDays?.daily?.weather_code[index]}.png`} alt="weather-icons" />
+          <img src={`/images/icons/small/1/${weatherDays?.daily?.weather_code[index]}.png`} alt="weather-icons" title={weatherCode[weatherDays?.daily?.weather_code[index]]}/>
           <div className="w-auto text-start">
-            <p className="text-neutral-white80 text-sm lg:text-base">{weatherDays?.daily?.precipitation_probability_max[index]}%</p>
+            <p className="text-neutral-white80 text-sm lg:text-base" title={`Chance of rain: ${weatherDays?.daily?.precipitation_probability_max[index]}%`}>{weatherDays?.daily?.precipitation_probability_max[index]}%</p>
           </div>
         </div>
         <div className="w-full flex justify-end text-end">
@@ -88,30 +87,62 @@ const DaysForecast = () => {
 
                     const flexEndContainer = "w-full flex flex-col justify-end items-start gap-2";
                     const flexEndChild = "w-full flex items-center justify-star gap-4";
+
                     return (
                       <Accordion key={index}>
                         <AccordionItem
                           aria-label="Weather"
                           className={"[&_>h2>button>div]:!flex-shrink [&_>h2>button>div]:w-full border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80"}
                           indicator={<SunIcon />}
-                          startContent={<DaysContainer item={item} index={index} today={today} weatherDays={weatherDays} weatherCode={weatherCode} />}
+                          startContent={<DaysContainer item={item} index={index} today={today} weatherDays={weatherDays} />}
                         >
-                          <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-6 p-2 md:p-4">
+                          <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-6 p-2 md:p-4">
+                            {/* Sunrise and Sunset in one row for tablet */}
+                            <div className="flex flex-row md:flex-col items-start gap-4 col-span-2 md:col-span-1">
                               <div className={`${flexStartContainer}`}>
                                 <div className={`${flexStartChild}`}>
                                   <img src={`/images/icons/sunset-sunrise/png/sunrise-dark.png`} alt="weather-icons" />
                                   <p className="text-neutral-white80 text-base leading-3">Sunrise</p>
                                 </div>
-                                <p className="text-neutral-white text-sm leading-3 pl-10">{formatHours(weatherDays?.daily?.sunrise[index])} </p>
+                                <p className="text-neutral-white text-sm pl-10">{formatHours(weatherDays?.daily?.sunrise[index])}</p>
                               </div>
 
+                              <div className={`${flexEndContainer}`}>
+                                <div className={`${flexEndChild}`}>
+                                  <img src={`/images/icons/sunset-sunrise/png/sunset-dark.png`} alt="weather-icons" />
+                                  <p className="text-neutral-white80 text-base leading-3">Sunset</p>
+                                </div>
+                                <p className="text-neutral-white text-sm pl-10">{formatHours(weatherDays?.daily?.sunset[index])}</p>
+                              </div>
+                            </div>
+
+                            {/* High and Low in one row for tablet */}
+                            <div className="flex flex-row md:flex-col items-start gap-4 col-span-2 md:col-span-1">
                               <div className={`${flexStartContainer}`}>
                                 <div className={`${flexStartChild}`}>
                                   <span className="days-forecast-icon"><CiTempHigh /></span>
                                   <p className="text-neutral-white80 text-base leading-3">High</p>
                                 </div>
-                                <div className="h-full w-auto flex gap-1 pl-10"><p className="text-sm text-neutral-white">{weatherDays?.daily?.apparent_temperature_max[index]}</p><span className="border-2 pt-1 border-neutral-white w-2 h-2 block rounded-full"></span></div>
+                                <div className="h-full w-auto flex gap-1 pl-10">
+                                  <p className="text-sm text-neutral-white">{weatherDays?.daily?.apparent_temperature_max[index]}</p>
+                                  <span className="border-2 pt-1 border-neutral-white w-2 h-2 block rounded-full"></span>
+                                </div>
                               </div>
+
+                              <div className={`${flexEndContainer}`}>
+                                <div className={`${flexEndChild}`}>
+                                  <span className="days-forecast-icon"><CiTempHigh /></span>
+                                  <p className="text-neutral-white80 text-base leading-3">Low</p>
+                                </div>
+                                <div className="h-full w-auto flex gap-1 pl-10">
+                                  <p className="text-sm text-neutral-white">{weatherDays?.daily?.apparent_temperature_min[index]}</p>
+                                  <span className="border-2 pt-1 border-neutral-white w-2 h-2 block rounded-full"></span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* LOTD and UV Index remain the same */}
+                            <div className="flex flex-row md:flex-col items-start gap-4 col-span-2 md:col-span-1">
                               <div className={`${flexStartContainer}`}>
                                 <div className={`${flexStartChild}`}>
                                   <span className="days-forecast-icon"><IoTimeSharp /></span>
@@ -119,21 +150,7 @@ const DaysForecast = () => {
                                 </div>
                                 <p className="text-sm text-neutral-white pl-10">{hours}h {minutes}m {seconds}s</p>
                               </div>
-                    
-                              <div className={`${flexEndContainer}`}>
-                                <div className={`${flexEndChild}`}>
-                                  <img src={`/images/icons/sunset-sunrise/png/sunset-dark.png`} alt="weather-icons" />
-                                  <p className="text-neutral-white80 text-base leading-3">Sunset</p>
-                                </div>
-                                <p className="text-neutral-white text-sm leading-3 pl-10">{formatHours(weatherDays?.daily?.sunset[index])}</p>
-                              </div>
-                              <div className={`${flexEndContainer}`}>
-                                <div className={`${flexEndChild}`}>
-                                  <span className="days-forecast-icon"><CiTempHigh /></span>
-                                  <p className="text-neutral-white80 text-base leading-3">Low</p>
-                                </div>
-                                <div className="h-full w-auto flex gap-1 pl-10"><p className="text-sm text-neutral-white">{weatherDays?.daily?.apparent_temperature_min[index]}</p><span className="border-2 pt-1 border-neutral-white w-2 h-2 block rounded-full"></span></div>
-                              </div>
+
                               <div className={`${flexEndContainer}`}>
                                 <div className={`${flexEndChild}`}>
                                   <span className="days-forecast-icon"><TbUvIndex /></span>
@@ -142,6 +159,7 @@ const DaysForecast = () => {
                                 <p className="text-sm text-neutral-white pl-10">{weatherDays?.daily?.uv_index_max[index]}%</p>
                               </div>
                             </div>
+                          </div>
                         </AccordionItem>
                       </Accordion>
                     );
