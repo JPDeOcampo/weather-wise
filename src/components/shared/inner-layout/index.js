@@ -7,7 +7,7 @@ const InnerLayout = ({ children }) => {
     const { darkMode } = useContext(ShareContext);
     return (
         <NextUIProvider className={`${darkMode ? 'dark' : 'light'} relative`}>
-            <main className="bg-primary h-auto min-h-screen">
+            <main className={`${darkMode ? 'bg-primary' : 'bg-img-day1'} h-auto min-h-screen`}>
                 {children}
             </main>
         </NextUIProvider>
