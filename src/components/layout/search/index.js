@@ -14,13 +14,15 @@ const Search = () => {
   }
 
   const handleKeydown = async (e) => {
-    if (e.key === "Enter") {
-      setLoading(true);
-      setIsClearVisible(true);
-      setCity(searchQuery);
-    } else if (e.key === "Backspace" && isClearVisible) {
-      if (city.length > 0 && searchQuery.length === 1) {
-        handleClear();
+    if (e.type === "keydown") {
+      if (e.key === "Enter") {
+        setLoading(true);
+        setIsClearVisible(true);
+        setCity(searchQuery);
+      } else if (e.key === "Backspace" && isClearVisible) {
+        if (city.length > 0 && searchQuery.length === 1) {
+          handleClear();
+        }
       }
     }
   }

@@ -32,6 +32,7 @@ const ShareState = ({ children }) => {
   const handleRefresh = () => {
     setRefresh(!refresh);
     setLoading(true);
+    setWeatherDays();
     router.refresh();
     setCity('');
     setIsNoResult(false);
