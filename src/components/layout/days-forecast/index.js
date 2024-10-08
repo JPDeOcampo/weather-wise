@@ -4,7 +4,7 @@ import { ShareContext } from "@/components/shared/context/share-state";
 import SubHeader from "@/components/shared/subheader";
 import { weatherCode } from "@/components/shared/constant";
 import { Accordion, AccordionItem } from "@nextui-org/accordion";
-import { SunIcon } from "../../../../public/images/icons";
+import { SunIcon, MoonIcon } from "../../../../public/images/icons";
 import { Is2xMobile } from "@/components/shared/utils/responsive";
 import BoxContainer from "@/components/shared/container";
 import SkeletonLoading from "@/components/shared/skeleton-loading";
@@ -50,7 +50,7 @@ const DaysContainer = ({ item, index, today, weatherDays }) => {
 const loadingSkeleton = 7;
 
 const DaysForecast = () => {
-  const { weatherDays, loading } = useContext(ShareContext);
+  const { weatherDays, loading, darkMode } = useContext(ShareContext);
   const { formatHours, formatSeconds } = FormatTimeHooks();
   return (
     <BoxContainer className="flex flex-col gap-4 h-auto md:h-[775px]">
@@ -93,7 +93,7 @@ const DaysForecast = () => {
                         <AccordionItem
                           aria-label="Weather"
                           className={"[&_>h2>button>div]:!flex-shrink [&_>h2>button>div]:w-full border-t-0 border-l-0 border-b-1 border-r-0 border-neutral-white80"}
-                          indicator={<SunIcon />}
+                          indicator={darkMode ? <MoonIcon /> : <SunIcon />}
                           startContent={<DaysContainer item={item} index={index} today={today} weatherDays={weatherDays} />}
                         >
                           <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-6 p-2 md:p-4">

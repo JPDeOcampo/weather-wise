@@ -25,6 +25,8 @@ const ShareState = ({ children }) => {
 
   const [isClearVisible, setIsClearVisible] = useState(false);
 
+  const [message, setMessage] = useState('');
+
   const router = useRouter();
 
   const handleRefresh = () => {
@@ -55,10 +57,27 @@ const ShareState = ({ children }) => {
         },
         (error) => {
           setIsError(true);
-          console.log(error, 'geo-location')
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              setMessage('Location access denied. Please enable location services in your settings.');
+              break;
+            case error.POSITION_UNAVAILABLE:
+              setMessage('Location information is unavailable. Please try again.');
+              break;
+            case error.TIMEOUT:
+              setMessage('The request to get your location timed out. Please try again.');
+              break;
+            default:
+              setMessage('An unknown error occurred.');
+              break;
+          }
         }
       );
+    } else {
+      setIsError(true);
+      setMessage('Geolocation is not supported by this browser.');
     }
+
   }, [refresh]);
 
   useEffect(() => {
@@ -121,6 +140,7 @@ const ShareState = ({ children }) => {
     handleRefresh,
     isClearVisible, 
     setIsClearVisible,
+    message,
   }), [
     weatherCity,
     city,
@@ -139,6 +159,7 @@ const ShareState = ({ children }) => {
     handleRefresh,
     isClearVisible, 
     setIsClearVisible,
+    message,
   ])
   return (
     <ShareContext.Provider value={contextValue}>

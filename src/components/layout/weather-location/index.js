@@ -8,7 +8,7 @@ const WeatherLocation = () => {
   const { weatherCity, weatherDays, loading, darkMode } = useContext(ShareContext);
 
   return (
-    <div className="w-full bg-transparent rounded-xl p-4 md:p-6 h-auto min-h-[260px]">
+    <div className={`w-full bg-transparent rounded-xl p-4 md:p-6 h-auto min-h-[260px] ${weatherDays?.current?.is_day === 1 ? 'bg-img-day' : 'bg-img-night'}`}>
       <div>
         {
           loading ? (
@@ -35,7 +35,7 @@ const WeatherLocation = () => {
                   return (
                     <div className="flex flex-col sm:flex-row gap-6 sm:gap-0 justify-between w-full" key={index}>
                       <div className="flex flex-col gap-10 sm:gap-0 sm:justify-between items-center sm:items-start min-h-[200px]">
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2 text-center sm:text-start">
                           <h2 className="text-4xl sm:text-5xl font-bold text-neutral-white">{`${item.name}, ${item.country_code}`}</h2>
                           <p className="text-sm md:text-base text-neutral-white80">Chance of rain for the current hour: {weatherDays?.hourly?.precipitation_probability[0]}%</p>
                         </div>

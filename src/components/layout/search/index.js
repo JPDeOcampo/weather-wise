@@ -14,11 +14,11 @@ const Search = () => {
   }
 
   const handleKeydown = async (e) => {
-    if (e.type === "keydown" && e.key === "Enter") {
+    if (e.key === "Enter") {
       setLoading(true);
       setIsClearVisible(true);
       setCity(searchQuery);
-    } else if (e.type === "keydown" && e.key === "Backspace" && isClearVisible) {
+    } else if (e.key === "Backspace" && isClearVisible) {
       if (city.length > 0 && searchQuery.length === 1) {
         handleClear();
       }

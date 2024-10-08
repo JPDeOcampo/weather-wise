@@ -9,8 +9,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import DarkModeButton from "@/components/shared/buttons/dark-mode-button";
 
 export default function Home() {
-  const { isError, isNoResult, handleRefresh } = useContext(ShareContext);
-
+  const { isError, isNoResult, handleRefresh, message } = useContext(ShareContext);
+console.log(message.length)
   return (
     <div className={`w-full max-w-7xl mx-auto relative px-4 md:px-6 py-6 ${isError || isNoResult ? 'h-lvh' : 'h-auto'}`}>
       <div className={`flex flex-col w-full gap-6 ${isError || isNoResult ? 'h-full' : 'h-auto'}`}>
@@ -29,7 +29,7 @@ export default function Home() {
           isError ? (
             <div className="w-full h-full flex justify-center items-center">
               <div className="flex flex-col gap-4 justify-center">
-                <p className="text-2xl font-bold text-red-500">Error fetching data</p>
+                <p className="text-2xl font-bold text-red-500">{message.length > 0 ? message : 'Error fetching data'}</p>
                 <div className="w-full flex justify-center">
                   <button className="text-base text-neutral-white font-medium bg-neutral-purple hover:bg-neutral-purple80 py-2 px-4 rounded-full w-auto" onClick={handleRefresh}>Try again</button>
                 </div>

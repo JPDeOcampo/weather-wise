@@ -9,6 +9,7 @@ import { FaCloud } from "react-icons/fa";
 import BoxContainer from "@/components/shared/container";
 import SkeletonLoading from "@/components/shared/skeleton-loading";
 import FormatTimeHooks from "@/components/shared/hooks/format-time";
+import { weatherCode } from "@/components/shared/constant";
 
 const TodayForecast = () => {
   const { weatherDays, loading } = useContext(ShareContext);
@@ -170,7 +171,7 @@ const TodayForecast = () => {
                                 <div className={`h-[130px] w-full max-w-36 flex-shrink-0 ${index === weatherDays?.hourly?.time?.length - 1 ? 'border-0' : 'border border-t-0 border-l-0 border-b-0 border-r-1'}} border-neutral-white80`} key={index}>
                                   <div className="h-auto w-full flex flex-col items-center gap-4">
                                     <p className="text-neutral-white80">{`${formattedHour}:00 ${period}`}</p>
-                                    <img src={`/images/icons/small/${weatherDays?.hourly?.is_day[index]}/${weatherDays?.hourly?.weather_code[index]}.png`} alt="weather-icons" />
+                                    <img src={`/images/icons/small/${weatherDays?.hourly?.is_day[index]}/${weatherDays?.hourly?.weather_code[index]}.png`} alt="weather-icons" title={weatherCode[weatherDays?.hourly?.weather_code[index]]}/>
                                     <div className="w-full flex justify-center gap-1">
                                       <p className="text-neutral-white text-2xl font-medium">{weatherDays?.hourly?.temperature_2m[index]}</p>
                                       <div className="h-full pt-1"><span className="border-2 border-neutral-white w-2 h-2 block rounded-full"></span></div>
@@ -196,7 +197,7 @@ const TodayForecast = () => {
                                 <div className={`h-[130px] w-full max-w-36 flex-shrink-0 ${index === weatherDays?.minutely_15?.time?.length - 1 ? 'border-0' : 'border border-t-0 border-l-0 border-b-0 border-r-1'}} border-neutral-white80`} key={index}>
                                   <div className="h-auto w-full flex flex-col items-center gap-4">
                                     <p className="text-neutral-white80">{`${formattedHour}:${minutes} ${period}`}</p>
-                                    <img src={`/images/icons/small/${weatherDays?.minutely_15?.is_day[index]}/${weatherDays?.minutely_15?.weather_code[index]}.png`} alt="weather-icons" />
+                                    <img src={`/images/icons/small/${weatherDays?.minutely_15?.is_day[index]}/${weatherDays?.minutely_15?.weather_code[index]}.png`} alt="weather-icons" title={weatherCode[weatherDays?.minutely_15?.weather_code[index]]}/>
                                     <div className="w-full flex justify-center gap-1">
                                       <p className="text-neutral-white text-2xl font-medium">{weatherDays?.minutely_15?.temperature_2m[index]}</p>
                                       <div className="h-full pt-1"><span className="border-2 border-neutral-white w-2 h-2 block rounded-full"></span></div>
