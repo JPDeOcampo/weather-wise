@@ -123,7 +123,7 @@ const TodayForecast = () => {
 
         <div>
           <div className="flex flex-col lg:flex-row justify-between lg:items-center pt-2 pb-3 px-2 gap-4">
-            <p className="font-medium"><span className="text-neutral-white80">Length of the day: </span>
+            <p className="text-base"><span className="text-neutral-white80">Length of the day: </span>
               {
                 loading ? (
                   <SkeletonLoading width={90} height={20} />

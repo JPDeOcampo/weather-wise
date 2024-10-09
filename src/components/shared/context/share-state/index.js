@@ -102,6 +102,11 @@ const ShareState = ({ children }) => {
               });
               const responses = await Promise.all(result);
               if (responses) {
+                if(responses[0].current.is_day === 1){
+                  setDarkMode(false);
+                }else{
+                  setDarkMode(true);
+                }
                 setWeatherDays(...responses);
                 setIsClearVisible(false);
                 setSearchQuery('');
