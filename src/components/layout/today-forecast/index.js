@@ -16,7 +16,7 @@ const TodayForecast = () => {
   const [isHourly, setIsHourly] = useState(true);
   const todayForecastValueClass = "text-neutral-white pl-8 text-lg";
 
-  const { formatSeconds, formatHours } = FormatTimeHooks();
+  const { formatSeconds, formatHours, formatHoursMins } = FormatTimeHooks();
 
   const loadingSkeleton = 3;
 
@@ -112,7 +112,7 @@ const TodayForecast = () => {
               </div>
             ) : (
               <p className={todayForecastValueClass}>
-                {formatHours(weatherDays?.daily?.sunrise[0])}
+                {formatHoursMins(weatherDays?.daily?.sunrise[0])}
               </p>
             )}
           </div>
@@ -131,7 +131,7 @@ const TodayForecast = () => {
               </div>
             ) : (
               <p className={todayForecastValueClass}>
-                {formatHours(weatherDays?.daily?.sunset[0])}
+                {formatHoursMins(weatherDays?.daily?.sunset[0])}
               </p>
             )}
           </div>
@@ -188,10 +188,6 @@ const TodayForecast = () => {
                   {isHourly ? (
                     <div className="flex pb-4 relative -left-4">
                       {weatherDays?.hourly?.time?.map((item, index) => {
-                        const hour = new Date(item).getHours();
-                        const period = hour < 12 ? "AM" : "PM";
-                        const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
-
                         return (
                           <div
                             className={`h-[130px] w-full max-w-36 flex-shrink-0 ${
@@ -202,7 +198,9 @@ const TodayForecast = () => {
                             key={index}
                           >
                             <div className="h-auto w-full flex flex-col items-center gap-4">
-                              <p className="text-neutral-white80">{`${formattedHour}:00 ${period}`}</p>
+                              <p className="text-neutral-white80">
+                                {formatHours(item)}
+                              </p>
                               <img
                                 src={`/images/icons/small/${weatherDays?.hourly?.is_day[index]}/${weatherDays?.hourly?.weather_code[index]}.png`}
                                 alt="weather-icons"
@@ -228,15 +226,6 @@ const TodayForecast = () => {
                   ) : (
                     <div className="flex pb-4 relative -left-4">
                       {weatherDays?.minutely_15?.time?.map((item, index) => {
-                        const date = new Date(item);
-                        const hour = date.getHours();
-                        const period = hour < 12 ? "AM" : "PM";
-                        const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
-                        const minutes = String(date.getMinutes()).padStart(
-                          2,
-                          "0"
-                        );
-
                         return (
                           <div
                             className={`h-[130px] w-full max-w-36 flex-shrink-0 ${
@@ -248,7 +237,9 @@ const TodayForecast = () => {
                             key={index}
                           >
                             <div className="h-auto w-full flex flex-col items-center gap-4">
-                              <p className="text-neutral-white80">{`${formattedHour}:${minutes} ${period}`}</p>
+                              <p className="text-neutral-white80">
+                                {formatHoursMins(item)}
+                              </p>
                               <img
                                 src={`/images/icons/small/${weatherDays?.minutely_15?.is_day[index]}/${weatherDays?.minutely_15?.weather_code[index]}.png`}
                                 alt="weather-icons"

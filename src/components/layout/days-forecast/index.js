@@ -66,7 +66,7 @@ const loadingSkeleton = 7;
 
 const DaysForecast = () => {
   const { weatherDays, loading, darkMode } = useContext(ShareContext);
-  const { formatHours, formatSeconds } = FormatTimeHooks();
+  const { formatHoursMins, formatSeconds } = FormatTimeHooks();
   return (
     <BoxContainer className="flex flex-col gap-4 h-auto md:h-[775px]">
       <div className="flex flex-col gap-4 h-full">
@@ -137,7 +137,7 @@ const DaysForecast = () => {
                               </p>
                             </div>
                             <p className="text-neutral-white text-sm pl-10">
-                              {formatHours(weatherDays?.daily?.sunrise[index])}
+                              {formatHoursMins(weatherDays?.daily?.sunrise[index])}
                             </p>
                           </div>
 
@@ -152,7 +152,7 @@ const DaysForecast = () => {
                               </p>
                             </div>
                             <p className="text-neutral-white text-sm pl-10">
-                              {formatHours(weatherDays?.daily?.sunset[index])}
+                              {formatHoursMins(weatherDays?.daily?.sunset[index])}
                             </p>
                           </div>
                         </div>
