@@ -7,10 +7,13 @@ const FormatTimeHooks = () => {
   };
 
   const formatHours = (item) => {
-    const hour = new Date(item).getHours();
+    const date = new Date(item);
+    const hour = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
     const period = hour < 12 ? "AM" : "PM";
     const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
-    return `${formattedHour}:00 ${period}`;
+    
+    return `${formattedHour}:${minutes} ${period}`;
   };
 
   return {
